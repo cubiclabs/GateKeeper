@@ -1,0 +1,1 @@
+(/CFIDE/(?!GraphData\.cfm))
