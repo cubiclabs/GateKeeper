@@ -54,7 +54,7 @@
 	<cffunction name="test" output="false" returntype="struct" hint="performs our gatekeeper tests">
 		<cfargument name="ip" default="#cgi.REMOTE_HOST#" required="false" type="string" hint="IP address to test">
 		<cfargument name="ua" default="#cgi.HTTP_USER_AGENT#" required="false" type="string" hint="user agent to test">
-		<cfargument name="uri" default="" required="false" type="string" hint="the uri that has been requested">
+		<cfargument name="uri" default="#cgi.SCRIPT_NAME#?#cgi.QUERY_STRING#" required="false" type="string" hint="the uri that has been requested">
 		<cfargument name="doTestIP" required="false" default="true" type="boolean">
 		<cfargument name="doTestUA" required="false" default="true" type="boolean">
 		<cfargument name="doTestURI" required="false" default="true" type="boolean">
