@@ -3,7 +3,7 @@ GateKeeper
 
 Prevent access to your ColdFusion sites by bad robots, suspicious IP addresses and blacklisted paths. We have been running this on a number servers since mid 2013 and it has proven to be very effective at removing unwanted visitors and has reduced the load put on the servers by unwanted robots.
 
-This does not replace good practice in securing your sites or servers and it is not affiated with Project Honeypot in any way.
+This does not replace good practice in securing your sites or servers and it is not affiliated with Project Honeypot in any way.
 
 
 Project Honeypot
