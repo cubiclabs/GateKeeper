@@ -34,7 +34,18 @@ The database is used for logging purposes and can also be used to cache honeypot
 
 ### Configuration Files
 
-A number of cfiguration files reside in the 'config' directory.
+A number of configuration files reside in the 'config' directory.
+
+#### IPWhitelist.cfm
+This lets you list ip addresses that you want to grant access to regarless of all the other tests. You can either specify an exact match by prefixing with an `=`. For example:
+
+```
+=127.0.0.1
+```
+
+Anything entered without the `=` prefix is treated as regular expression.
+
+Separate entries with a new line.
 
 #### IPBlacklist.cfm
 This lets you list ip addresses that you want to outright blacklist. You can either specify an exact match by prefixing with an `=`. For example:
