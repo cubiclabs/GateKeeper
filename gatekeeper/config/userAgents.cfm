@@ -1,2 +1,2 @@
-(binlar|casper|cmsworldmap|comodo|diavol|dotbot|feedfinder|flicky|ia_archiver|jakarta|kmccrew|nutch|planetwork|purebot|pycurl|skygrid|sucker|turnit|vikspider|zmeu)
-(ezooms|AhrefsBot|abonti|MJ12bot|CompSpyBot|BLEXBot|Synapse)
+﻿(binlar|casper|cmsworldmap|comodo|diavol|dotbot|feedfinder|flicky|ia_archiver|jakarta|kmccrew|nutch|planetwork|purebot|pycurl|skygrid|sucker|turnit|vikspider|zmeu)
+(ezooms|AhrefsBot|abonti|MJ12bot|CompSpyBot|BLEXBot|Synapse|Sgrunt|Python|XoviBot|sqlmap|LSSRocketCrawler)

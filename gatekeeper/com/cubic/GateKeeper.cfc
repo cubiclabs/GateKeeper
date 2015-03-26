@@ -76,30 +76,33 @@
 		<cfset local.result.block = false>
 		<cfset local.result.reason = arrayNew(1)>
 
-		<!--- perform our IP Address test --->
-		<cfif arguments.doTestIP>
-			<cfset local.result.ipTest = testIP(arguments.ip)>
-			<cfif local.result.ipTest.block>
-				<cfset local.result.block = true>
-				<cfset arrayAppend(local.result.reason, local.result.ipTest.reason)>
+		<!--- validate against our whitelist first --->
+		<cfif NOT testWhitelist(arguments.ip)>
+			<!--- perform our IP Address test --->
+			<cfif arguments.doTestIP>
+				<cfset local.result.ipTest = testIP(arguments.ip)>
+				<cfif local.result.ipTest.block>
+					<cfset local.result.block = true>
+					<cfset arrayAppend(local.result.reason, local.result.ipTest.reason)>
+				</cfif>
 			</cfif>
-		</cfif>
 
-		<!--- perform out UA test --->
-		<cfif arguments.doTestUA>
-			<cfset local.result.uaTest = testUA(arguments.ua)>
-			<cfif local.result.uaTest.block>
-				<cfset local.result.block = true>
-				<cfset arrayAppend(local.result.reason, local.result.uaTest.reason)>
+			<!--- perform out UA test --->
+			<cfif arguments.doTestUA>
+				<cfset local.result.uaTest = testUA(arguments.ua)>
+				<cfif local.result.uaTest.block>
+					<cfset local.result.block = true>
+					<cfset arrayAppend(local.result.reason, local.result.uaTest.reason)>
+				</cfif>
 			</cfif>
-		</cfif>
 
-		<!--- perform our URI tests --->
-		<cfif arguments.doTestURI>
-			<cfset local.result.uriTest = testURI(arguments.uri)>
-			<cfif local.result.uriTest.block>
-				<cfset local.result.block = true>
-				<cfset arrayAppend(local.result.reason, local.result.uriTest.reason)>
+			<!--- perform our URI tests --->
+			<cfif arguments.doTestURI>
+				<cfset local.result.uriTest = testURI(arguments.uri)>
+				<cfif local.result.uriTest.block>
+					<cfset local.result.block = true>
+					<cfset arrayAppend(local.result.reason, local.result.uriTest.reason)>
+				</cfif>
 			</cfif>
 		</cfif>
 
@@ -111,6 +114,33 @@
 		</cfif>
 
 		<cfreturn local.result>
+	</cffunction>
+
+	<!--- ========================= --->
+	<cffunction name="testWhitelist" output="false" returntype="boolean" hint="performs our gatekeeper whitelist IP address test">
+		<cfargument name="ip" required="true" type="string" hint="IP address to test">
+		
+		<cfset var local = structNew()>
+
+		<!--- get our useragent tests --->
+		<cfset local.aTests = readConfig("IPWhitelist")>
+
+		<cfloop array="#local.aTests#" index="local.test">
+			<cfif len(local.test)>
+				<cfif left(local.test, 1) IS "=">
+					<cfif arguments.ip IS mid(local.test, 2, len(local.test))>
+						<!--- ip is matched to our whitelist --->
+						<cfreturn true>
+					</cfif>
+				<cfelseif reFindNoCase(local.test, arguments.ip)>
+					<!--- ip is matched to our whitelist --->
+					<cfreturn true>
+				</cfif>
+			</cfif>
+		</cfloop>
+
+		<!--- ip is not in our whitelist --->
+		<cfreturn false>
 	</cffunction>
 
 	<!--- ========================= --->
